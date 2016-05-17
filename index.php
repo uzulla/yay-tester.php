@@ -1,5 +1,10 @@
 <?php
 declare(strict_types = 1);
+set_error_handler(function($errno, $errstr, $errfile, $errline){
+    error_log("Error: \"{$errstr}\" at {$errfile}:{$errline}");
+    die('something went wrong, see log.');
+});
+
 require __DIR__ . "/vendor/autoload.php";
 
 if (
