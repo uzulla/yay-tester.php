@@ -40,7 +40,7 @@ if (isset($_POST['code'])) {
     }
 } else {
     $filename = (string)$_GET['filename'] ?? 'unless';
-    if(!preg_match('/\A[a-z]{1,32}\z/u', $filename)) throw new \Exception('invalid filename');
+    if (!preg_match('/\A[a-z]{1,32}\z/u', $filename)) throw new \Exception('invalid filename');
     $code = file_get_contents("sample/{$filename}.php");
 }
 
@@ -99,9 +99,9 @@ $_SESSION['csrf'] = $_SESSION['csrf'] ?? base64_encode(random_bytes(64));
             $("#form").submit();
         }
 
-        function changeSample(e){
+        function changeSample(e) {
             var filename = $('option:selected', e.currentTarget).val();
-            location.href = '/?filename='+filename;
+            location.href = '/?filename=' + filename;
         }
     </script>
 </head>
@@ -116,12 +116,12 @@ $_SESSION['csrf'] = $_SESSION['csrf'] ?? base64_encode(random_bytes(64));
     <select onchange="changeSample(event);">
         <option>load sample code</option>
         <?php
-        $filename_list = array_map(function($v){
+        $filename_list = array_map(function ($v) {
             preg_match('|sample/([a-z]{1,32}).php|u', $v, $_);
             return $_[1];
         }, glob('sample/*.php'));
-        foreach($filename_list as $filename){
-            echo "<option>{$filename}</option>";
+        foreach ($filename_list as $filename) {
+            echo "<option>" . htmlspecialchars($filename, ENT_QUOTES) . "</option>";
         }
         ?>
     </select>
