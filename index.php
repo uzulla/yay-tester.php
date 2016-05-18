@@ -44,7 +44,7 @@ if (isset($_POST['code'])) {
         $converted_code .= $e->getMessage();
     }
 } else {
-    $filename = (string)$_GET['filename'] ?? 'unless';
+    $filename = (string)($_GET['filename'] ?? 'unless');
     if (!preg_match('/\A[a-z]{1,32}\z/u', $filename)) throw new \Exception('invalid filename');
     $code = file_get_contents("sample/{$filename}.php");
 }
